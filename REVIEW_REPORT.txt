@@ -1,0 +1,65 @@
+SECURITY REVIEW - ROGUE WARRIOR PLAYER VOICES v0.1.2
+Observed date: November 7, 2026 (America/New_York).
+This is a review aid, not antivirus clearance or a malware-analysis certificate.
+
+Mod: https://www.nexusmods.com/incursionredriver/mods/296
+Original ZIP: 31f7e043587882954260ccc29ebb452769bdbc9a3421415521c428caae434377
+Helper: e1209d7c25227b4f5288cde70c5865aaee9af53d97ff40616969dc235279a23a
+Signature: NotSigned (local Authenticode inspection).
+Helper size: 9,728 bytes. Windows x64 .NET Framework executable.
+
+LIVE REPORTS OBSERVED
+Archive: 5/62 detections.
+Executable: 8/71 detections.
+The SHA-256 in the user's link matches the release ZIP exactly. The embedded
+helper bytes match the locally built VoiceHost.exe exactly.
+
+Helper detections displayed:
+Bkav Pro: W32.Malware.E21AA67E
+Elastic: Malicious (high Confidence)
+Google: Detected
+McAfee Scanner: Ti!E1209D7C2522
+SecureAge: Malicious
+SentinelOne (Static ML): Static AI - Suspicious PE
+Trapmine: Suspicious.low.ml.score
+Varist: W64/MSIL_Tiny.AF.gen!Eldorado
+
+Archive report: https://www.virustotal.com/gui/file/31f7e043587882954260ccc29ebb452769bdbc9a3421415521c428caae434377
+Helper report: https://www.virustotal.com/gui/file/e1209d7c25227b4f5288cde70c5865aaee9af53d97ff40616969dc235279a23a
+Reports may change after reanalysis or vendor updates.
+
+SOURCE BEHAVIOR REVIEW
+- Windows System.Media.SoundPlayer reads/plays PCM WAV data from Audio.
+- The Scale method adjusts PCM16 samples for the voice-volume setting.
+- A single worker and named mutex serialize playback; Stop waits for the worker.
+- A local text protocol reports ready/playing/done/stopped/error states.
+- A game-process-name check keeps the helper alive during map loading.
+- File access is limited by application logic to the mod root/Runtime and WAV
+  requests within the mod's Audio directory.
+- The helper exits when its session is superseded or the game is gone and
+  its heartbeat expires. It installs no startup task, service, or registry key.
+- No network, download, microphone, credential, injection, anti-debug or
+  privilege-elevation functionality appears in the reviewed C# source.
+- The Lua launcher starts the included helper as a normal child application.
+  It does not alter Windows security settings.
+
+LIMITS
+Source review is not a conclusive independent examination of the compiled PE.
+Static/ML detection labels alone do not prove either maliciousness or a false
+positive. The exact reason for each engine's result has not been established.
+No new scan has been submitted, no vendor has approved the file, and Nexus
+has not cleared it as part of this work.
+
+REMEDIATION ROUTE
+Nexus's published policy directs uploaders to contact support@nexusmods.com
+or a moderator with the mod-page link. It recommends keeping the quarantined
+file available for review instead of deleting it and disrupting version history.
+Policy: https://help.nexusmods.com/article/117-file-scan-statuses
+
+Use the exact blocked binary/hash for vendor false-positive review. The helper
+is required by this build: removing it alone breaks voice playback. A future
+engine-native audio backend would be a separate implementation and compatibility
+test, not a repackaging fix. A trusted signing certificate can establish publisher
+identity but does not guarantee that a vendor will change its verdict.
+
+The existing ZIP and installed mod have not been modified during this review.

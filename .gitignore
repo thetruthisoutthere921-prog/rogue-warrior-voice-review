@@ -1,0 +1,7 @@
+*.exe
+*.dll
+*.zip
+*.wav
+Audio/
+Runtime/
+*.log

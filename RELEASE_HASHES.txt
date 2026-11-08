@@ -1,0 +1,7 @@
+SHA-256 of the original v0.1.2 release files (not included in this repository):
+
+31f7e043587882954260ccc29ebb452769bdbc9a3421415521c428caae434377  Rogue-Warrior-Player-Voices-0.1.2.zip
+e1209d7c25227b4f5288cde70c5865aaee9af53d97ff40616969dc235279a23a  VoiceHost.exe
+
+VoiceHost.exe: 9,728 bytes; unsigned Windows x64 .NET Framework executable.
+These hashes identify the existing flagged files; they are not antivirus clearance.
